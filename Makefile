@@ -1,4 +1,4 @@
 
 build:
-	sudo docker build . -t jouve/dehydrated
+	docker build . -t jouve/dehydrated
 
