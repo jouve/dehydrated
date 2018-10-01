@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ ! -f config ]; then
-  cp /dehydrated/config .
-fi
+#if [ ! -f config ]; then
+#  cp /dehydrated/config .
+#fi
 
 exec /dehydrated/dehydrated "$@"
 
