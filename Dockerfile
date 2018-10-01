@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 
 RUN apk add --no-cache \
         bash \
@@ -6,18 +6,17 @@ RUN apk add --no-cache \
         openssl \
         python
 
-ARG DEHYDRATED_TAG=v0.5.0
-ARG LETSENCRYPT_OVH_HOOK=3ca3207f02d7a7c82e6cd637ec2a6200e3d0928
+ARG DEHYDRATED_TAG=v0.6.2
+ARG LETSENCRYPT_OVH_HOOK=1800b57991db4357536561a06f82dbfe4f076a2d
 RUN apk add --no-cache tar && \
-    mkdir -p dehydrated && \
+    mkdir dehydrated && \
     curl -L https://github.com/lukas2511/dehydrated/archive/${DEHYDRATED_TAG}.tar.gz | tar -C dehydrated --strip-components 1 -xzf - && \
     mkdir -p dehydrated/hooks/ovh && \
     curl -L https://github.com/Rbeuque74/letsencrypt-ovh-hook/archive/${LETSENCRYPT_OVH_HOOK}.tar.gz | tar -C dehydrated/hooks/ovh --strip-components 1 -xzf - && \
     apk del --no-cache tar
 
 RUN apk add --no-cache py2-pip && \
-    pip install -r dehydrated/hooks/ovh/requirements.txt && \
-    rm -r /root/.cache && \
+    pip install --no-cache-dir -r dehydrated/hooks/ovh/requirements.txt && \
     apk del --no-cache py2-pip
 
 RUN mkdir /etc/dehydrated && \
