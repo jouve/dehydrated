@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.10
 
 RUN apk add --no-cache \
         bash \
@@ -6,7 +6,7 @@ RUN apk add --no-cache \
         openssl \
         python
 
-ARG DEHYDRATED_TAG=v0.6.2
+ARG DEHYDRATED_TAG=v0.6.5
 ARG LETSENCRYPT_OVH_HOOK=1800b57991db4357536561a06f82dbfe4f076a2d
 RUN apk add --no-cache tar && \
     mkdir dehydrated && \
